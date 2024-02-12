@@ -21,29 +21,69 @@ import com.breautek.fuse.FuseAPIPacket;
 import com.breautek.fuse.FuseAPIResponse;
 import com.breautek.fuse.FuseContext;
 import com.breautek.fuse.FusePlugin;
-
+import android.widget.RelativeLayout;
 import org.json.JSONException;
-
+import org.json.JSONObject;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class NativeViewPlugin extends FusePlugin {
 
+    public static final String TAG = "NativeViewPlugin";
+
+    private final RelativeLayout $container;
+
+    private final HashMap<String, NativeView> $views;
+
     public NativeViewPlugin(FuseContext context) {
         super(context);
+
+        $views = new HashMap<>();
+
+        $container = new RelativeLayout(context.getActivityContext());
+    }
+
+    @Override
+    protected void _initHandles() {
+        this.attachHandler("/echo", new APIHandler<NativeViewPlugin>(this) {
+            @Override
+            public void execute(FuseAPIPacket packet, FuseAPIResponse response) throws IOException, JSONException {
+                JSONObject params = packet.readAsJSONObject();
+
+                JSONObject jRect = params.getJSONObject("rect");
+                NativeRect rect = new NativeRect(
+                    (float) jRect.getDouble("x"),
+                    (float) jRect.getDouble("y"),
+                    (float) jRect.getDouble("w"),
+                    (float) jRect.getDouble("h")
+                );
+
+                JSONObject jOverlay = params.optJSONObject("overlay");
+                NativeOverlay.WebviewBuilder overlayBuilder = null;
+
+                if (jOverlay != null) {
+                    overlayBuilder = new NativeOverlay.WebviewBuilder(this.plugin.getContext());
+                    if (jOverlay.has("html")) {
+                        overlayBuilder.setHTMLString(jOverlay.getString("html"));
+                    }
+                    else if (jOverlay.has("file")) {
+                        overlayBuilder.setFile(jOverlay.getString("file"));
+                    }
+                    else {
+                        this.plugin.getContext().getLogger().warn(TAG, "Overlay requires HTML or a file path.");
+                        overlayBuilder = null;
+                    }
+                }
+
+                NativeView nview = new NativeView(this.plugin.getContext(), rect, overlayBuilder);
+                $views.put(nview.getID(), nview);
+                $container.addView(nview.getView());
+            }
+        });
     }
 
     @Override
     public String getID() {
         return "FuseNativeView";
-    }
-
-    @Override
-    protected void _initHandles() {
-        this.attachHandler("/create", new APIHandler<NativeViewPlugin>(this) {
-            @Override
-            public void execute(FuseAPIPacket packet, FuseAPIResponse response) throws IOException, JSONException {
-
-            }
-        });
     }
 }
