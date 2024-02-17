@@ -15,6 +15,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export {FuseNativeViewNode} from './FuseNativeViewNode';
-export {FuseNativeViewPlugin} from './FuseNativeViewPlugin';
-export {FuseNativeRect} from './FuseNativeRect';
+import {TFuseSerializable} from '@btfuse/core';
+
+interface _FuseNativeRect {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+}
+
+export type FuseNativeRect = TFuseSerializable<_FuseNativeRect>;

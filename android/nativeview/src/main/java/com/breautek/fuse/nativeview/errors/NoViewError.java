@@ -1,6 +1,6 @@
 
 /*
-Copyright 2023-2024 Breautek 
+Copyright 2023-2024 Breautek
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,6 +15,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export {FuseNativeViewNode} from './FuseNativeViewNode';
-export {FuseNativeViewPlugin} from './FuseNativeViewPlugin';
-export {FuseNativeRect} from './FuseNativeRect';
+package com.breautek.fuse.nativeview.errors;
+
+import com.breautek.fuse.FuseError;
+
+public class NoViewError extends FuseError {
+    public NoViewError(String id) {
+        super("FuseNativeView", 0, "No view found with id \"" + id + "\"");
+    }
+}

@@ -17,6 +17,9 @@ limitations under the License.
 
 package com.breautek.fuse.nativeview;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class NativeRect {
     public float width;
     public float height;
@@ -28,5 +31,16 @@ public class NativeRect {
         height = h;
         this.x = x;
         this.y = y;
+    }
+
+    public static NativeRect fromJSONObject(JSONObject jrect) throws JSONException {
+        float x, y, w, h;
+
+        x = (float) jrect.getDouble("x");
+        y = (float) jrect.getDouble("y");
+        w = (float) jrect.getDouble("w");
+        h = (float) jrect.getDouble("h");
+
+        return new NativeRect(x, y, w, h);
     }
 }

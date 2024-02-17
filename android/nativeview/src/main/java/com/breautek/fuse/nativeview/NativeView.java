@@ -69,13 +69,35 @@ public class NativeView {
         return $id;
     }
 
+    public void addView(View v) {
+        $layout.addView(v, new FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+        ));
+    }
+
     public View getView() {
         return $layout;
     }
 
+    public void setRect(NativeRect rect) {
+        synchronized (this) {
+            $x = rect.x;
+            $y = rect.y;
+            $width = rect.width;
+            $height = rect.height;
+            $updateLayout();
+        }
+    }
+
     private void $updateLayout() {
         FuseScreenUtils utils = $context.getScreenUtils();
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+//                (int) utils.toNativePx($width),
+//                (int) utils.toNativePx($height)
+//        );
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 (int) utils.toNativePx($width),
                 (int) utils.toNativePx($height)
         );

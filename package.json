@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib/api.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/btfuse/fuse-native-dom#readme",
   "devDependencies": {
-    "@btfuse/core": "^0.8.0"
+    "@btfuse/core": "^0.8.0",
+    "typescript": "^5.3.3"
   }
 }
