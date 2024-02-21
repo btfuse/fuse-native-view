@@ -22,14 +22,17 @@ import com.breautek.fuse.FuseScreenUtils;
 
 import java.util.UUID;
 
+import android.content.Context;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class NativeView {
+public class NativeView extends RelativeLayout {
     private final String $id;
     private final FuseContext $context;
 
@@ -38,10 +41,34 @@ public class NativeView {
     private float $x;
     private float $y;
 
-    private final RelativeLayout $layout;
+//    private final RelativeLayout $layout;
     private final NativeOverlay $overlay;
 
+//    private static class ViewContainer extends ViewGroup {
+//        private final View $view;
+//        private final View $overlay;
+//
+//        public ViewContainer(@NonNull Context context, @NonNull View view, @Nullable View overlay) {
+//            super(context);
+//            $view = view;
+//            $overlay = overlay;
+//        }
+//
+//        @Override
+//        public boolean onTouchEvent(MotionEvent evt) {
+//            if (!$overlay.onTouchEvent(evt)) {
+//                return $view.onTouchEvent(evt);
+//            }
+//
+//            return false;
+//        }
+//
+//        @Override
+//        protected void onLayout(boolean changed, int l, int t, int r, int b) {}
+//    }
+
     public NativeView(@NonNull FuseContext context, @NonNull NativeRect rect, @Nullable NativeOverlay.IOverlayBuilder overlayBuilder) {
+        super(context.getActivityContext());
         $id = UUID.randomUUID().toString();
         $context = context;
         $width = rect.width;
@@ -49,16 +76,20 @@ public class NativeView {
         $x = rect.x;
         $y = rect.y;
 
-        $layout = new RelativeLayout(context.getActivityContext());
+        setBackgroundColor(0x0);
+
+//        $layout = new RelativeLayout(context.getActivityContext());
         $updateLayout();
-        $layout.setBackgroundColor(0x0);
+//        $layout.setBackgroundColor(0x0);
 
         if (overlayBuilder != null) {
             $overlay = new NativeOverlay(overlayBuilder);
-            $layout.addView($overlay.getView(), new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT
-            ));
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+            );
+            addView($overlay.getView(), params);
+//            $layout.addView($overlay.getView(), params);
         }
         else {
             $overlay = null;
@@ -69,16 +100,19 @@ public class NativeView {
         return $id;
     }
 
-    public void addView(View v) {
-        $layout.addView(v, new FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT
-        ));
-    }
+//    public void addView(View v) {
+//        $layout.addView(v, 0, new FrameLayout.LayoutParams(
+//            FrameLayout.LayoutParams.MATCH_PARENT,
+//                FrameLayout.LayoutParams.MATCH_PARENT
+//        ));
+//    }
 
-    public View getView() {
-        return $layout;
-    }
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {}
+
+//    public View getView() {
+//        return $layout;
+//    }
 
     public void setRect(NativeRect rect) {
         synchronized (this) {
@@ -88,6 +122,31 @@ public class NativeView {
             $height = rect.height;
             $updateLayout();
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent evt) {
+        boolean didHandle = false;
+        if ($overlay != null) {
+            didHandle = $overlay.getView().onTouchEvent(evt);
+        }
+
+        if (!didHandle) {
+            int count = getChildCount();
+            for (int i = 0; i < count; i++) {
+                View child = getChildAt(i);
+                if ($overlay != null && child == $overlay.getView()) {
+                    continue;
+                }
+
+                didHandle = child.onTouchEvent(evt);
+                if (didHandle) {
+                    break;
+                }
+            }
+        }
+
+        return didHandle;
     }
 
     private void $updateLayout() {
@@ -104,6 +163,7 @@ public class NativeView {
 
         params.leftMargin = (int) utils.toNativePx($x);
         params.topMargin = (int) utils.toNativePx($y);
-        $layout.setLayoutParams(params);
+//        $layout.setLayoutParams(params);
+       setLayoutParams(params);
     }
 }

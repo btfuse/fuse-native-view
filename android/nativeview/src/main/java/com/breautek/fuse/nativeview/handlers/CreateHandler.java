@@ -38,34 +38,36 @@ public class CreateHandler extends FusePlugin.APIHandler<NativeViewPlugin> {
     @Override
     public void execute(FuseAPIPacket packet, FuseAPIResponse response) throws IOException, JSONException {
         final JSONObject params = packet.readAsJSONObject();
-
         final JSONObject jRect = params.getJSONObject("rect");
         final NativeRect rect = NativeRect.fromJSONObject(jRect);
-
         final JSONObject options = params.optJSONObject("options");
-        NativeOverlay.WebviewBuilder overlayBuilder = null;
+
+        NativeOverlay.WebviewBuilder strongOverlayBuilder = null;
         if (options != null) {
             if (options.has("overlayHTML") || options.has("overlayFile")) {
-                overlayBuilder = new NativeOverlay.WebviewBuilder(this.plugin.getContext());
+                strongOverlayBuilder = new NativeOverlay.WebviewBuilder(this.plugin.getContext());
 
                 if (options.has("overlayHTML")) {
-                    overlayBuilder.setHTMLString(options.getString("overlayHTML"));
+                    strongOverlayBuilder.setHTMLString(options.getString("overlayHTML"));
                 }
                 else if (options.has("overlayFile")) {
-                    overlayBuilder.setFile(options.getString("overlayFile"));
+                    strongOverlayBuilder.setFile(options.getString("overlayFile"));
                 }
                 else {
                     this.plugin.getContext().getLogger().warn(this.plugin.getID(), "Overlay requires HTML or a file path.");
-                    overlayBuilder = null;
+                    strongOverlayBuilder = null;
                 }
             }
         }
 
-        final NativeView nview = new NativeView(this.plugin.getContext(), rect, overlayBuilder);
-        this.plugin.addView(nview);
+        final NativeOverlay.WebviewBuilder overlayBuilder = strongOverlayBuilder;
 
         this.plugin.getContext().runOnMainThread(() -> {
-            this.plugin.getContainer().addView(nview.getView());
+            final NativeView nview = new NativeView(this.plugin.getContext(), rect, overlayBuilder);
+            this.plugin.addView(nview);
+
+//            this.plugin.getContainer().addView(nview.getView());
+            this.plugin.getContainer().addView(nview);
             response.send(nview.getID());
         });
     }

@@ -22,6 +22,7 @@ import com.breautek.fuse.FuseAPIResponse;
 import com.breautek.fuse.FuseContext;
 import com.breautek.fuse.FusePlugin;
 import com.breautek.fuse.nativeview.handlers.CreateHandler;
+import com.breautek.fuse.nativeview.handlers.DeleteHandler;
 import com.breautek.fuse.nativeview.handlers.UpdateHandler;
 
 import android.view.View;
@@ -81,7 +82,8 @@ public class NativeViewPlugin extends FusePlugin {
         synchronized ($views) {
             $views.put(nview.getID(), nview);
         }
-        $container.addView(nview.getView());;
+        $container.addView(nview);
+//        $container.addView(nview.getView());;
         return nview;
     }
 
@@ -89,6 +91,15 @@ public class NativeViewPlugin extends FusePlugin {
         synchronized ($views) {
             $views.put(view.getID(), view);
         }
+    }
+
+    public void destroy(@NonNull NativeView view) {
+        synchronized ($views) {
+            $views.remove(view.getID());
+        }
+
+        $container.removeView(view);
+//        $container.removeView(view.getView());
     }
 
     public ViewGroup getContainer() {
@@ -99,49 +110,7 @@ public class NativeViewPlugin extends FusePlugin {
     protected void _initHandles() {
         this.attachHandler("/create", new CreateHandler(this));
         this.attachHandler("/update", new UpdateHandler(this));
-//        this.attachHandler("/create", new APIHandler<NativeViewPlugin>(this) {
-//            @Override
-//            public void execute(FuseAPIPacket packet, FuseAPIResponse response) throws IOException, JSONException {
-//                JSONObject params = packet.readAsJSONObject();
-//
-//                JSONObject jRect = params.getJSONObject("rect");
-//                NativeRect rect = new NativeRect(
-//                    (float) jRect.getDouble("x"),
-//                    (float) jRect.getDouble("y"),
-//                    (float) jRect.getDouble("w"),
-//                    (float) jRect.getDouble("h")
-//                );
-//
-//                JSONObject options = params.optJSONObject("options");
-//                NativeOverlay.WebviewBuilder overlayBuilder = null;
-//                if (options != null) {
-//                    if (options.has("overlayHTML") || options.has("overlayFile")) {
-//                        overlayBuilder = new NativeOverlay.WebviewBuilder(this.plugin.getContext());
-//
-//                        if (options.has("overlayHTML")) {
-//                            overlayBuilder.setHTMLString(options.getString("overlayHTML"));
-//                        }
-//                        else if (options.has("overlayFile")) {
-//                            overlayBuilder.setFile(options.getString("overlayFile"));
-//                        }
-//                        else {
-//                            this.plugin.getContext().getLogger().warn(TAG, "Overlay requires HTML or a file path.");
-//                            overlayBuilder = null;
-//                        }
-//                    }
-//                }
-//
-//                NativeView nview = new NativeView(this.plugin.getContext(), rect, overlayBuilder);
-//                synchronized ($views) {
-//                    $views.put(nview.getID(), nview);
-//                }
-//
-//                this.plugin.getContext().runOnMainThread(() -> {
-//                    $container.addView(nview.getView());
-//                    response.send(nview.getID());
-//                });
-//            }
-//        });
+        this.attachHandler("/delete", new DeleteHandler(this));
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.webkit.WebViewAssetLoader;
 import androidx.webkit.WebViewClientCompat;
 
@@ -15,12 +16,14 @@ import com.breautek.fuse.FuseContext;
 import java.io.File;
 
 public class NativeOverlay {
+    @NonNull
     private final View $view;
 
     public NativeOverlay(IOverlayBuilder builder) {
         $view = builder.build();
     }
 
+    @NonNull
     public View getView() {
         return $view;
     }
@@ -80,14 +83,16 @@ public class NativeOverlay {
             WebSettings settings = webview.getSettings();
             settings.setAllowFileAccess(false);
             settings.setAllowContentAccess(false);
-            settings.setJavaScriptEnabled(false);
+            // TODO: Make this false by default, but allow it to be enabled via options
+            settings.setJavaScriptEnabled(true);
             settings.setDomStorageEnabled(false);
 
             if ($html != null) {
                 webview.loadData($html, "text/html", "utf-8");
             }
             else {
-                webview.loadUrl($file);
+                String endpoint = "https://" + $context.getHost() + $file;
+                webview.loadUrl(endpoint);
             }
 
             return webview;
