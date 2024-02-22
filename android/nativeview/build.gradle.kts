@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.breautek.fuse.nativedom"
+    namespace = "com.breautek.fuse.nativeview"
     compileSdk = 34
 
     defaultConfig {

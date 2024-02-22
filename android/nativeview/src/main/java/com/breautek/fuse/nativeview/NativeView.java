@@ -23,6 +23,7 @@ import com.breautek.fuse.FuseScreenUtils;
 import java.util.UUID;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +84,7 @@ public class NativeView extends RelativeLayout {
 //        $layout.setBackgroundColor(0x0);
 
         if (overlayBuilder != null) {
-            $overlay = new NativeOverlay(overlayBuilder);
+            $overlay = new NativeOverlay($context, overlayBuilder);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
@@ -94,10 +95,65 @@ public class NativeView extends RelativeLayout {
         else {
             $overlay = null;
         }
+
+//        setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i("test", "testing");
+//            }
+//        });
+//
+//        $overlay.getView().setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i("test", "testing");
+//            }
+//        });
+
+//        setOnTouchListener(new OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return false;
+//            }
+//        });
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent evt) {
+        return true;
+//        boolean didHandle = false;
+//        if ($overlay != null) {
+////            didHandle = false;
+//            didHandle = $overlay.getView().dispatchTouchEvent(evt);
+//        }
+//
+//        if (!didHandle) {
+//            int count = getChildCount();
+//            for (int i = 0; i < count; i++) {
+//                View child = getChildAt(i);
+//                if ($overlay != null && child == $overlay.getView()) {
+//                    continue;
+//                }
+//
+//                didHandle = child.dispatchTouchEvent(evt);
+//                if (didHandle) {
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return didHandle;
     }
 
     public String getID() {
         return $id;
+    }
+
+    public void setContent(View v) {
+        addView(v, 0, new FrameLayout.LayoutParams(
+           FrameLayout.LayoutParams.MATCH_PARENT,
+           FrameLayout.LayoutParams.MATCH_PARENT
+        ));
     }
 
 //    public void addView(View v) {
@@ -107,8 +163,10 @@ public class NativeView extends RelativeLayout {
 //        ));
 //    }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {}
+//    @Override
+//    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+//        super.onLayout();
+//    }
 
 //    public View getView() {
 //        return $layout;
@@ -128,7 +186,9 @@ public class NativeView extends RelativeLayout {
     public boolean onTouchEvent(MotionEvent evt) {
         boolean didHandle = false;
         if ($overlay != null) {
-            didHandle = $overlay.getView().onTouchEvent(evt);
+            if ($overlay.willRespondTo(evt)) {
+                didHandle = $overlay.getView().dispatchTouchEvent(evt);
+            }
         }
 
         if (!didHandle) {
@@ -139,7 +199,8 @@ public class NativeView extends RelativeLayout {
                     continue;
                 }
 
-                didHandle = child.onTouchEvent(evt);
+                didHandle = child.dispatchTouchEvent(evt);
+//                didHandle = child.onTouchEvent(evt);
                 if (didHandle) {
                     break;
                 }
