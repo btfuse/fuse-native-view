@@ -1,0 +1,20 @@
+
+platform :ios, '15.0'
+
+workspace 'BTFuseNativeView.xcworkspace'
+
+source 'https://github.com/breautek/pods.git'
+
+target 'BTFuseNativeView' do
+    use_frameworks!
+    project 'BTFuseNativeView/BTFuseNativeView.xcodeproj'
+    
+    pod 'BTFuse', '0.8.7'
+end
+
+target 'TestApp' do
+    use_frameworks!
+    project 'TestApp/TestApp.xcodeproj'
+    
+    pod 'BTFuse', '0.8.7'
+end

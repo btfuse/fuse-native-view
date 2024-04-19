@@ -95,7 +95,7 @@ export class FuseNativeViewPlugin extends FusePlugin {
     }
 
     public async destroy(node: FuseNativeViewNode): Promise<void> {
-        let response: FuseAPIResponse = await this._exec('/destroy', ContentType.TEXT, node.getID());
+        let response: FuseAPIResponse = await this._exec('/delete', ContentType.TEXT, node.getID());
         if (response.isError()) {
             throw await response.readAsError();
         }

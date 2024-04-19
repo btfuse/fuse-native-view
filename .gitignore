@@ -1,4 +1,9 @@
 node_modules
 lib
 *.tgz
+dist
+.DS_Store
+*.lock
+xcuserdata
+ios/Pods
 

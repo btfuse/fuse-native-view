@@ -5,6 +5,7 @@
   "main": "lib/api.js",
   "scripts": {
     "build": "tsc",
+    "build:tests:ios": "cd testapp && webpack --config ./webpack.ios.js --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +23,11 @@
   "homepage": "https://github.com/btfuse/fuse-native-dom#readme",
   "devDependencies": {
     "@btfuse/core": "^0.8.0",
-    "typescript": "^5.3.3"
+    "copy-webpack-plugin": "^12.0.2",
+    "source-map-loader": "^5.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
   }
 }
