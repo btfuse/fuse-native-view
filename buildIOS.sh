@@ -53,8 +53,6 @@ spushd ios
     iosBuild=$(echo "$(xcodebuild -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Release -sdk iphoneos -showBuildSettings | grep -E '^\s*CONFIGURATION_BUILD_DIR =' | awk -F '= ' '{print $2}' | xargs)")
     simBuild=$(echo "$(xcodebuild -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Debug -sdk iphonesimulator -showBuildSettings | grep -E '^\s*CONFIGURATION_BUILD_DIR =' | awk -F '= ' '{print $2}' | xargs)")
 
-    echo "DEBUG: $iosBuild"
-
     echo "Signing iOS build..."
     codesign -s $BTFUSE_CODESIGN_IDENTITY "$iosBuild/BTFuseNativeView.framework"
 
