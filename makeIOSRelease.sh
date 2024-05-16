@@ -42,14 +42,14 @@ echo $BUILD_NO > ./ios/BUILD
 git add ios/VERSION ios/BUILD ios/BTFuseNativeView/VERSION.xcconfig
 git commit -m "iOS Release: $VERSION"
 git push
-git tag -a $VERSION -m "iOS Release: $VERSION"
+git tag -a ios/$VERSION -m "iOS Release: $VERSION"
 git push --tags
 
-gh release create $VERSION \
-    ./dist/BTFuseNativeView.xcframework.zip \
-    ./dist/BTFuseNativeView.xcframework.zip.sha1.txt \
-    ./dist/BTFuseNativeView.framework.dSYM.zip \
-    ./dist/BTFuseNativeView.framework.dSYM.zip.sha1.txt \
+gh release create ios/$VERSION \
+    ./dist/ios/BTFuseNativeView.xcframework.zip \
+    ./dist/ios/BTFuseNativeView.xcframework.zip.sha1.txt \
+    ./dist/ios/BTFuseNativeView.framework.dSYM.zip \
+    ./dist/ios/BTFuseNativeView.framework.dSYM.zip.sha1.txt \
     --verify-tag --generate-notes
 
 pod spec lint BTFuseNativeView.podspec
