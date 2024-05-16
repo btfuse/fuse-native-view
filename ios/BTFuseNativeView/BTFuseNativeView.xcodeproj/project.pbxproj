@@ -21,6 +21,16 @@
 		941F22792B87DFB6005DCE20 /* BTFuseNativeViewRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 941F22782B87DFB6005DCE20 /* BTFuseNativeViewRect.m */; };
 		946395572BB89EEF00FCCF77 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946395562BB89EEF00FCCF77 /* CoreGraphics.framework */; };
 		946395592BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 946395582BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m */; };
+		9471FB162BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 9471FB152BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9471FB182BDB44D400E92F50 /* BTFuseNativeViewOverlayBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 9471FB172BDB44D400E92F50 /* BTFuseNativeViewOverlayBuilder.m */; };
+		9471FB1A2BDB492600E92F50 /* BTFuseNativeViewWebviewOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 9471FB192BDB492600E92F50 /* BTFuseNativeViewWebviewOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9471FB1C2BDB4A1400E92F50 /* BTFuseNativeViewWebviewOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 9471FB1B2BDB4A1400E92F50 /* BTFuseNativeViewWebviewOverlay.m */; };
+		9471FB1E2BDB4AB800E92F50 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9471FB1D2BDB4AB800E92F50 /* WebKit.framework */; };
+		9471FB212BDDBB1300E92F50 /* BTFuseNativeViewRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 9471FB202BDDBB1300E92F50 /* BTFuseNativeViewRoot.m */; };
+		9471FB222BDDBB3400E92F50 /* BTFuseNativeViewRoot.h in Headers */ = {isa = PBXBuildFile; fileRef = 9471FB1F2BDDBACC00E92F50 /* BTFuseNativeViewRoot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9471FB262BDDC15F00E92F50 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 9471FB252BDDC15F00E92F50 /* assets */; };
+		9471FB282BE997B400E92F50 /* BTFuseNativeViewWebviewOverlayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9471FB272BE997B400E92F50 /* BTFuseNativeViewWebviewOverlayController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9471FB2A2BE9980A00E92F50 /* BTFuseNativeViewWebviewOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9471FB292BE9980A00E92F50 /* BTFuseNativeViewWebviewOverlayController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +60,16 @@
 		941F22782B87DFB6005DCE20 /* BTFuseNativeViewRect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTFuseNativeViewRect.m; sourceTree = "<group>"; };
 		946395562BB89EEF00FCCF77 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		946395582BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTFuseNativeViewContainer.m; sourceTree = "<group>"; };
+		9471FB152BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTFuseNativeViewOverlayBuilder.h; sourceTree = "<group>"; };
+		9471FB172BDB44D400E92F50 /* BTFuseNativeViewOverlayBuilder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTFuseNativeViewOverlayBuilder.m; sourceTree = "<group>"; };
+		9471FB192BDB492600E92F50 /* BTFuseNativeViewWebviewOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTFuseNativeViewWebviewOverlay.h; sourceTree = "<group>"; };
+		9471FB1B2BDB4A1400E92F50 /* BTFuseNativeViewWebviewOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTFuseNativeViewWebviewOverlay.m; sourceTree = "<group>"; };
+		9471FB1D2BDB4AB800E92F50 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9471FB1F2BDDBACC00E92F50 /* BTFuseNativeViewRoot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTFuseNativeViewRoot.h; sourceTree = "<group>"; };
+		9471FB202BDDBB1300E92F50 /* BTFuseNativeViewRoot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTFuseNativeViewRoot.m; sourceTree = "<group>"; };
+		9471FB252BDDC15F00E92F50 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		9471FB272BE997B400E92F50 /* BTFuseNativeViewWebviewOverlayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTFuseNativeViewWebviewOverlayController.h; sourceTree = "<group>"; };
+		9471FB292BE9980A00E92F50 /* BTFuseNativeViewWebviewOverlayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTFuseNativeViewWebviewOverlayController.m; sourceTree = "<group>"; };
 		CA97B08B309773B82153526A /* Pods-BTFuseNativeView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTFuseNativeView.debug.xcconfig"; path = "Target Support Files/Pods-BTFuseNativeView/Pods-BTFuseNativeView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9471FB1E2BDB4AB800E92F50 /* WebKit.framework in Frameworks */,
 				946395572BB89EEF00FCCF77 /* CoreGraphics.framework in Frameworks */,
 				941F22672B87D46E005DCE20 /* BTFuse.xcframework in Frameworks */,
 				941F22752B87DDA4005DCE20 /* UIKit.framework in Frameworks */,
@@ -89,6 +110,7 @@
 		941F22442B87D2AA005DCE20 = {
 			isa = PBXGroup;
 			children = (
+				9471FB252BDDC15F00E92F50 /* assets */,
 				941F226E2B87D511005DCE20 /* PrivacyInfo.xcprivacy */,
 				941F22502B87D2AA005DCE20 /* BTFuseNativeView */,
 				941F225A2B87D2AA005DCE20 /* BTFuseNativeViewTests */,
@@ -131,6 +153,10 @@
 				941F226C2B87D4CA005DCE20 /* BTFuseNativeViewPlugin.h */,
 				941F22722B87DADC005DCE20 /* BTFuseNativeViewContainer.h */,
 				941F22762B87DE14005DCE20 /* BTFuseNativeViewRect.h */,
+				9471FB152BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h */,
+				9471FB192BDB492600E92F50 /* BTFuseNativeViewWebviewOverlay.h */,
+				9471FB1F2BDDBACC00E92F50 /* BTFuseNativeViewRoot.h */,
+				9471FB272BE997B400E92F50 /* BTFuseNativeViewWebviewOverlayController.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -141,6 +167,10 @@
 				941F22702B87D5D5005DCE20 /* BTFuseNativeViewPlugin.m */,
 				941F22782B87DFB6005DCE20 /* BTFuseNativeViewRect.m */,
 				946395582BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m */,
+				9471FB172BDB44D400E92F50 /* BTFuseNativeViewOverlayBuilder.m */,
+				9471FB1B2BDB4A1400E92F50 /* BTFuseNativeViewWebviewOverlay.m */,
+				9471FB202BDDBB1300E92F50 /* BTFuseNativeViewRoot.m */,
+				9471FB292BE9980A00E92F50 /* BTFuseNativeViewWebviewOverlayController.m */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -148,6 +178,7 @@
 		94540C036690349DAD208FDF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9471FB1D2BDB4AB800E92F50 /* WebKit.framework */,
 				946395562BB89EEF00FCCF77 /* CoreGraphics.framework */,
 				941F22742B87DDA4005DCE20 /* UIKit.framework */,
 				941F22662B87D46E005DCE20 /* BTFuse.xcframework */,
@@ -165,7 +196,11 @@
 			files = (
 				941F226D2B87D4CA005DCE20 /* BTFuseNativeViewPlugin.h in Headers */,
 				941F22772B87DE14005DCE20 /* BTFuseNativeViewRect.h in Headers */,
+				9471FB282BE997B400E92F50 /* BTFuseNativeViewWebviewOverlayController.h in Headers */,
 				941F22732B87DADC005DCE20 /* BTFuseNativeViewContainer.h in Headers */,
+				9471FB162BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h in Headers */,
+				9471FB1A2BDB492600E92F50 /* BTFuseNativeViewWebviewOverlay.h in Headers */,
+				9471FB222BDDBB3400E92F50 /* BTFuseNativeViewRoot.h in Headers */,
 				941F225D2B87D2AA005DCE20 /* BTFuseNativeView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +213,7 @@
 			buildConfigurationList = 941F22602B87D2AA005DCE20 /* Build configuration list for PBXNativeTarget "BTFuseNativeView" */;
 			buildPhases = (
 				BCE2797823DB9007D88A5CFE /* [CP] Check Pods Manifest.lock */,
+				941AE2BE2BF2E17200C187EB /* Compile Overlay JS */,
 				941F22492B87D2AA005DCE20 /* Headers */,
 				941F224A2B87D2AA005DCE20 /* Sources */,
 				941F224B2B87D2AA005DCE20 /* Frameworks */,
@@ -252,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				941F226F2B87D511005DCE20 /* PrivacyInfo.xcprivacy in Resources */,
+				9471FB262BDDC15F00E92F50 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +302,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		941AE2BE2BF2E17200C187EB /* Compile Overlay JS */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile Overlay JS";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\ncd ../..\n\nnpx webpack --config webpack.ios.js --mode none\n";
+		};
 		BCE2797823DB9007D88A5CFE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -294,8 +350,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9471FB212BDDBB1300E92F50 /* BTFuseNativeViewRoot.m in Sources */,
 				941F22712B87D5D5005DCE20 /* BTFuseNativeViewPlugin.m in Sources */,
 				946395592BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m in Sources */,
+				9471FB1C2BDB4A1400E92F50 /* BTFuseNativeViewWebviewOverlay.m in Sources */,
+				9471FB2A2BE9980A00E92F50 /* BTFuseNativeViewWebviewOverlayController.m in Sources */,
+				9471FB182BDB44D400E92F50 /* BTFuseNativeViewOverlayBuilder.m in Sources */,
 				941F22792B87DFB6005DCE20 /* BTFuseNativeViewRect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,7 +417,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -421,7 +481,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

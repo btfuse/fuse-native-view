@@ -19,9 +19,51 @@ limitations under the License.
 #import <BTFuse/BTFuse.h>
 #import <BTFuseNativeView/BTFuseNativeViewContainer.h>
 
+@implementation BTFuseNativeViewContainerView {
+    __weak BTFuseNativeViewOverlayRectManager* $rectManager;
+}
+
+- (void) setRectManager:(BTFuseNativeViewOverlayRectManager*) rectManager {
+    $rectManager = rectManager;
+}
+
+- (UIView*) hitTest:(CGPoint) point withEvent:(UIEvent*) event {
+    if (!$rectManager) {
+        return [super hitTest: point withEvent: event];
+    }
+    
+    if ([self.subviews count] > 1) {
+        NSArray* rects = [$rectManager getRects];
+        bool shouldDelegateToOverlay = false;
+        
+        for (NSDictionary* jRect in rects) {
+            CGRect rect = [BTFuseNativeViewRect fromJSON: jRect];
+            if (CGRectContainsPoint(rect, point)) {
+                // Touch is within one of the rects, delegate to webView
+                shouldDelegateToOverlay = true;
+                break;
+            }
+        }
+        
+        if (shouldDelegateToOverlay) {
+            return [[self.subviews lastObject] hitTest: point  withEvent: event];
+        }
+        else {
+            UIView *nativeView = [self.subviews firstObject];
+            CGPoint pointInNativeView = [self convertPoint:point toView:nativeView];
+            return [nativeView hitTest:pointInNativeView withEvent:event];
+        }
+    }
+        
+    return [super hitTest: point withEvent: event];;
+}
+
+@end
+
 @implementation BTFuseNativeViewContainer {
     BTFuseContext* $context;
     NSString* $ident;
+    BTFuseNativeViewWebviewOverlayController* $overlayController;
 }
 
 - (instancetype) init:(BTFuseContext*) context {
@@ -30,20 +72,41 @@ limitations under the License.
 }
 
 - (instancetype) init:(BTFuseContext*) context withRect:(CGRect) rect {
-    self = [super initWithFrame: rect];
+    self = [super init];
     
     $context = context;
     NSUUID *uuid = [NSUUID UUID];
     $ident = [uuid UUIDString];
     
-//    [self setBackgroundColor: [UIColor clearColor]];
-    [self setBackgroundColor: [UIColor redColor]];
+    self.view.frame = rect;
+    
+    [self.view setBackgroundColor: [UIColor clearColor]];
+//    [self setBackgroundColor: [UIColor redColor]];
     
     return self;
+}
+
+- (void) loadView {
+    self.view = [[BTFuseNativeViewContainerView alloc] init];
 }
 
 - (NSString*) getID {
     return $ident;
 }
+
+- (void) setContent:(UIView*) view {
+    [self.view insertSubview: view atIndex: 0];
+}
+
+- (void) setOverlay:(BTFuseNativeViewWebviewOverlayController*) overlayController {
+    [self addChildViewController: overlayController];
+    [self.view addSubview: overlayController.view];
+    [(BTFuseNativeViewContainerView*)self.view setRectManager: [overlayController getRectManager]];
+}
+
+//- (void) touchesBegan:(NSSet<UITouch*>*)touches withEvent:(UIEvent*) event {
+//    NSLog(@"Received touch event on container view");
+//    [super touchesBegan:touches withEvent:event];
+//}
 
 @end

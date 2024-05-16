@@ -106,8 +106,10 @@
       // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
       "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
     },
-    "exclude": [
-      "./lib",
-      "./src/overlay"
+    "files": [
+      "./src/api.ts",
+      "./src/FuseNativeRect.ts",
+      "./src/FuseNativeViewNode.ts",
+      "./src/FuseNativeViewPlugin.ts"
     ]
 }

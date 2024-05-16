@@ -15,16 +15,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#ifndef BTFuseNativeViewRect_h
-#define BTFuseNativeViewRect_h
+#ifndef BTFuseNativeViewOverlayBuilder_h
+#define BTFuseNativeViewOverlayBuilder_h
 
-#import <CoreGraphics/CoreGraphics.h>
+#import <BTFuse/BTFuse.h>
 
-@interface BTFuseNativeViewRect: NSObject
+@interface BTFuseNativeViewOverlayRectManager: NSObject
+
+- (instancetype) init NS_DESIGNATED_INITIALIZER;
+
+- (void) setRects:(NSString*) serializedRects;
+- (NSArray*) getRects;
+
+@end
+
+@interface BTFuseNativeViewOverlayBuilder: NSObject
 
 - (instancetype) init NS_UNAVAILABLE;
+- (instancetype) init:(BTFuseContext*) context NS_DESIGNATED_INITIALIZER;
 
-+ (CGRect) fromJSON:(NSDictionary*) rect;
+- (BTFuseContext*) getContext;
 
 @end
 

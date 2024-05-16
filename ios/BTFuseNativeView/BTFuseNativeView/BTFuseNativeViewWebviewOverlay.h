@@ -15,16 +15,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#ifndef BTFuseNativeViewRect_h
-#define BTFuseNativeViewRect_h
+#ifndef BTFuseNativeViewWebviewOverlay_h
+#define BTFuseNativeViewWebviewOverlay_h
 
-#import <CoreGraphics/CoreGraphics.h>
+#import <UIKit/UIKit.h>
+#import <BTFuseNativeView/BTFuseNativeViewOverlayBuilder.h>
+#import <BTFuseNativeView/BTFuseNativeViewWebviewOverlayController.h>
 
-@interface BTFuseNativeViewRect: NSObject
+@interface BTFuseNativeViewWebviewOverlayBuilder: BTFuseNativeViewOverlayBuilder
 
-- (instancetype) init NS_UNAVAILABLE;
+- (void) setHTMLString:(NSString*) html;
+- (void) setFile:(NSString*) path;
 
-+ (CGRect) fromJSON:(NSDictionary*) rect;
+- (BTFuseNativeViewWebviewOverlayController*) build;
 
 @end
 

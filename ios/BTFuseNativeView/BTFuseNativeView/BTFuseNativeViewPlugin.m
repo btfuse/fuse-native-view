@@ -20,11 +20,14 @@ limitations under the License.
 #import <BTFuseNativeView/BTFuseNativeViewPlugin.h>
 #import <BTFuseNativeView/BTFuseNativeViewContainer.h>
 #import <BTFuseNativeView/BTFuseNativeViewRect.h>
+#import <BTFuseNativeView/BTFuseNativeViewOverlayBuilder.h>
+#import <BTFuseNativeView/BTFuseNativeViewWebviewOverlay.h>
+#import <BTFuseNativeView/BTFuseNativeViewRoot.h>
 #import <CoreGraphics/CoreGraphics.h>
 
 @implementation BTFuseNativeViewPlugin {
     NSMutableDictionary<NSString*, BTFuseNativeViewContainer*>* $views;
-    UIView* $container;
+    BTFuseNativeViewRoot* $container;
 }
 
 - (instancetype) init:(BTFuseContext*) context {
@@ -36,7 +39,9 @@ limitations under the License.
     
     WKWebView* webview = [context getWebview];
     UIView* contentView = [webview.scrollView.subviews firstObject];
-    $container = [[UIView alloc] initWithFrame: contentView.frame];
+    $container = [[BTFuseNativeViewRoot alloc] initWithFrame: contentView.frame];
+    $container.backgroundColor = [UIColor clearColor];
+    $container.opaque = false;
     
     [
         webview.scrollView
@@ -114,23 +119,95 @@ limitations under the License.
     }];
 }
 
-- (void) $createView:(NSDictionary*) options response:(BTFuseAPIResponse*) response {
-    NSDictionary* jRect = [options objectForKey: @"rect"];
+- (void) $createView:(NSDictionary*) params response:(BTFuseAPIResponse*) response {
+    NSDictionary* jRect = [params objectForKey: @"rect"];
     
     if (jRect == nil) {
         [response sendError: [[BTFuseError alloc] init:[self getID] withCode: 0 withMessage:@"Rect is required."]];
         return;
     };
     
+    NSDictionary* options = [params objectForKey: @"options"];
+    if (options == nil) {
+        options = [[NSDictionary alloc] init];
+    }
+    
+    NSString* overlayHTML = [options objectForKey: @"overlayHTML"];
+    NSString* overlayFile = [options objectForKey: @"overlayFile"];
+    
+    BTFuseNativeViewWebviewOverlayBuilder* overlayBuilder = nil;
+    
+    if (overlayHTML != nil) {
+        overlayBuilder = [[BTFuseNativeViewWebviewOverlayBuilder alloc] init: [self getContext]];
+        [overlayBuilder setHTMLString: overlayHTML];
+    }
+    else if (overlayFile != nil) {
+        overlayBuilder = [[BTFuseNativeViewWebviewOverlayBuilder alloc] init: [self getContext]];
+        [overlayBuilder setFile: overlayFile];
+    }
+    
     CGRect rect = [BTFuseNativeViewRect fromJSON: jRect];
     
-    BTFuseNativeViewContainer* view = [[BTFuseNativeViewContainer alloc] init: [self getContext] withRect: rect];
-    @synchronized ($views) {
-        [$views setObject: view forKey: [view getID]];
-    }
-    [$container addSubview: view];
+    BTFuseNativeViewContainer* containerController = [[BTFuseNativeViewContainer alloc] init: [self getContext] withRect: rect];
     
-    [response sendString: [view getID]];
+    if (overlayBuilder != nil) {
+        BTFuseNativeViewWebviewOverlayController* overlayController = [overlayBuilder build];
+//        [containerController addChildViewController: overlayController];
+        overlayController.view.translatesAutoresizingMaskIntoConstraints = NO;
+        [containerController setOverlay: overlayController];
+//        [containerController.view addSubview: overlayController.view];
+        
+        [
+            NSLayoutConstraint
+            constraintWithItem: overlayController.view
+            attribute: NSLayoutAttributeTop
+            relatedBy: NSLayoutRelationEqual
+            toItem: containerController.view
+            attribute: NSLayoutAttributeTop
+            multiplier:1.0
+            constant:0.0
+        ].active = YES;
+        
+        [
+            NSLayoutConstraint
+            constraintWithItem: overlayController.view
+            attribute: NSLayoutAttributeBottom
+            relatedBy: NSLayoutRelationEqual
+            toItem: containerController.view
+            attribute: NSLayoutAttributeBottom
+            multiplier:1.0
+            constant:0.0
+        ].active = YES;
+        
+        [
+            NSLayoutConstraint
+            constraintWithItem: overlayController.view
+            attribute: NSLayoutAttributeLeft
+            relatedBy: NSLayoutRelationEqual
+            toItem: containerController.view
+            attribute: NSLayoutAttributeLeft
+            multiplier:1.0
+            constant:0.0
+        ].active = YES;
+        
+        [
+            NSLayoutConstraint
+            constraintWithItem: overlayController.view
+            attribute: NSLayoutAttributeRight
+            relatedBy: NSLayoutRelationEqual
+            toItem: containerController.view
+            attribute: NSLayoutAttributeRight
+            multiplier:1.0
+            constant:0.0
+        ].active = YES;
+    }
+    
+    @synchronized ($views) {
+        [$views setObject: containerController forKey: [containerController getID]];
+    }
+    [$container addSubview: containerController.view];
+    
+    [response sendString: [containerController getID]];
 }
 
 - (void) $updateView:(NSDictionary*) options response:(BTFuseAPIResponse*) response {
@@ -148,17 +225,17 @@ limitations under the License.
         return;
     };
     
-    BTFuseNativeViewContainer* view = nil;
+    BTFuseNativeViewContainer* viewController = nil;
     @synchronized($views) {
-        view = [$views objectForKey: nodeID];
+        viewController = [$views objectForKey: nodeID];
     }
     
-    if (view == nil) {
+    if (viewController == nil) {
         [response sendError: [[BTFuseError alloc] init:[self getID] withCode: 0 withMessage:@"View not found."]];
         return;
     }
     
-    view.frame = [BTFuseNativeViewRect fromJSON: jRect];
+    viewController.view.frame = [BTFuseNativeViewRect fromJSON: jRect];
     
     [response sendNoContent];
 }
@@ -184,7 +261,7 @@ limitations under the License.
         [$views removeObjectForKey: viewID];
     }
     
-    [nview removeFromSuperview];
+    [nview.view removeFromSuperview];
     
     [response sendNoContent];
 }

@@ -15,17 +15,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#ifndef BTFuseNativeViewRect_h
-#define BTFuseNativeViewRect_h
+#ifndef BTFuseNativeViewRoot_h
+#define BTFuseNativeViewRoot_h
 
+#import <UIKit/UIKit.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-@interface BTFuseNativeViewRect: NSObject
-
-- (instancetype) init NS_UNAVAILABLE;
-
-+ (CGRect) fromJSON:(NSDictionary*) rect;
+@interface BTFuseNativeViewRoot: UIView
 
 @end
 
 #endif
+

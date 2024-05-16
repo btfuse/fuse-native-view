@@ -20,14 +20,25 @@ limitations under the License.
 
 #import <UIKit/UIKit.h>
 #import <BTFuseNativeView/BTFuseNativeViewRect.h>
+#import <BTFuseNativeView/BTFuseNativeViewOverlayBuilder.h>
+#import <BTFuseNativeView/BTFuseNativeViewWebviewOverlayController.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-@interface BTFuseNativeViewContainer: UIView
+@interface BTFuseNativeViewContainerView: UIView
+
+- (void) setRectManager:(BTFuseNativeViewOverlayRectManager*) rectManager;
+
+@end
+
+@interface BTFuseNativeViewContainer: UIViewController
 - (instancetype) init:(BTFuseContext*) context;
-- (instancetype) init:(BTFuseContext*) context withRect:(CGRect) rect NS_DESIGNATED_INITIALIZER;
-- (instancetype) initWithCoder:(NSCoder*) coder NS_UNAVAILABLE;
-- (instancetype) initWithFrame:(CGRect) frame NS_UNAVAILABLE;
+- (instancetype) init:(BTFuseContext*) context withRect:(CGRect) rect;
+//- (instancetype) initWithCoder:(NSCoder*) coder NS_UNAVAILABLE;
+//- (instancetype) initWithFrame:(CGRect) frame NS_UNAVAILABLE;
 - (instancetype) init NS_UNAVAILABLE;
+
+- (void) setContent:(UIView*) view;
+- (void) setOverlay:(BTFuseNativeViewWebviewOverlayController*) overlayController;
 
 - (NSString*) getID;
 

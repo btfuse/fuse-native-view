@@ -15,18 +15,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#import <Foundation/Foundation.h>
 
-//! Project version number for BTFuseNativeView.
-FOUNDATION_EXPORT double BTFuseNativeViewVersionNumber;
+#ifndef BTFuseNativeViewWebviewOverlayController_h
+#define BTFuseNativeViewWebviewOverlayController_h
 
-//! Project version string for BTFuseNativeView.
-FOUNDATION_EXPORT const unsigned char BTFuseNativeViewVersionString[];
-
-#import <BTFuseNativeView/BTFuseNativeViewPlugin.h>
-#import <BTFuseNativeView/BTFuseNativeViewContainer.h>
-#import <BTFuseNativeView/BTFuseNativeViewRect.h>
+#import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
+#import <BTFuse/BTFuse.h>
 #import <BTFuseNativeView/BTFuseNativeViewOverlayBuilder.h>
-#import <BTFuseNativeView/BTFuseNativeViewWebviewOverlay.h>
-#import <BTFuseNativeView/BTFuseNativeViewRoot.h>
-#import <BTFuseNativeView/BTFuseNativeViewWebviewOverlayController.h>
+
+@interface BTFuseNativeViewWebviewOverlayController: UIViewController <WKNavigationDelegate, WKScriptMessageHandler>
+
+- (instancetype) init:(BTFuseContext*) context withPath:(NSString*) path;
+- (instancetype) init:(BTFuseContext*) context withHTML:(NSString*) html;
+
+- (WKWebView*) getWebview;
+- (BTFuseNativeViewOverlayRectManager*) getRectManager;
+
+@end
+
+#endif

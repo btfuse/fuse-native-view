@@ -165,7 +165,7 @@ public class NativeOverlay {
                 public void onPageFinished(WebView view, String url) {
                     String apiScript = null;
                     try {
-                        InputStream overlayAPIScriptStream = $context.getActivityContext().getResources().openRawResource(R.raw.overlay);
+                        InputStream overlayAPIScriptStream = $context.getActivityContext().getResources().openRawResource(R.raw.btfuse_nativeviewoverlay);
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                             byte[] bytes = overlayAPIScriptStream.readAllBytes();

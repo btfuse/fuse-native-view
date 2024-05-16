@@ -15,17 +15,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#ifndef BTFuseNativeViewRect_h
-#define BTFuseNativeViewRect_h
+#import <Foundation/Foundation.h>
+#import <BTFuseNativeView/BTFuseNativeViewRoot.h>
 
-#import <CoreGraphics/CoreGraphics.h>
+@implementation BTFuseNativeViewRoot {}
 
-@interface BTFuseNativeViewRect: NSObject
-
-- (instancetype) init NS_UNAVAILABLE;
-
-+ (CGRect) fromJSON:(NSDictionary*) rect;
+- (BOOL) pointInside:(CGPoint) point withEvent:(UIEvent*) event {
+    for (UIView *subview in self.subviews) {
+        if (!subview.isHidden && subview.alpha > 0.01 && subview.userInteractionEnabled) {
+            CGPoint subviewPoint = [self convertPoint:point toView:subview];
+            if ([subview pointInside:subviewPoint withEvent:event]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 @end
-
-#endif

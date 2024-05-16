@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.library")
 }
@@ -7,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -27,10 +28,23 @@ android {
 
 dependencies {
     compileOnly("com.breautek.fuse:core:0.8.5")
-    implementation("androidx.webkit:webkit:1.10.0")
+    implementation("androidx.webkit:webkit:1.11.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+android.libraryVariants.configureEach {
+    val variantName = this.baseName.replaceFirstChar(Char::titlecase);
+
+    val prepareJSTask = tasks.register<Exec>("prepareJS${variantName}") {
+        this.workingDir("../../");
+        commandLine("npx", "webpack", "--mode", "none", "--config", "webpack.android.js");
+    }
+
+    tasks.named("generate${variantName}Resources").configure {
+        this.dependsOn(prepareJSTask);
+    }
 }

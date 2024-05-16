@@ -6,4 +6,5 @@ dist
 *.lock
 xcuserdata
 ios/Pods
-
+/ios/BTFuseNativeView/assets/BTFuseNativeViewOverlay.js
+/android/nativeview/src/main/res/raw/btfuse_nativeviewoverlay.js

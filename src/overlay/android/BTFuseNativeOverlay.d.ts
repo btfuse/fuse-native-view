@@ -15,17 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#ifndef BTFuseNativeViewRect_h
-#define BTFuseNativeViewRect_h
-
-#import <CoreGraphics/CoreGraphics.h>
-
-@interface BTFuseNativeViewRect: NSObject
-
-- (instancetype) init NS_UNAVAILABLE;
-
-+ (CGRect) fromJSON:(NSDictionary*) rect;
-
-@end
-
-#endif
+interface Window {
+    BTFuseNativeOverlay: {
+        setDOMRects(rects: string): void;
+    }
+}

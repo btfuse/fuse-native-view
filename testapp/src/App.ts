@@ -34,14 +34,16 @@ window.onload = async () => {
 
     let n: HTMLDivElement = document.createElement('div');
     document.body.appendChild(n);
-    n.style.width = '100px';
-    n.style.height = '100px';
+    n.style.width = '300px';
+    n.style.height = '400px';
     n.style.position = 'absolute';
-    n.style.left = '50px';
-    n.style.top = '50px';
+    n.style.left = '25px';
+    n.style.top = '25px';
     n.style.outline = '1px solid blue';
 
-    node = await plugin.create(n);
+    node = await plugin.create(n, {
+        overlayFile: '/assets/overlay.html'
+    });
 
     document.body.addEventListener('click', () => {
         if (!node) {

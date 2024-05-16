@@ -15,17 +15,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-#ifndef BTFuseNativeViewRect_h
-#define BTFuseNativeViewRect_h
+import {FuseNativeViewOverlay} from '../FuseNativeViewOverlay';
 
-#import <CoreGraphics/CoreGraphics.h>
-
-@interface BTFuseNativeViewRect: NSObject
-
-- (instancetype) init NS_UNAVAILABLE;
-
-+ (CGRect) fromJSON:(NSDictionary*) rect;
-
-@end
-
-#endif
+export class IOSFuseNativeViewOverlay extends FuseNativeViewOverlay {
+    protected override _setDOMRects(rects: string): void {
+        window.webkit.messageHandlers.setDOMRects.postMessage(rects);
+    }
+}
