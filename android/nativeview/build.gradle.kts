@@ -1,6 +1,7 @@
 
 plugins {
     id("com.android.library")
+    id("maven-publish")
 }
 
 android {
@@ -46,5 +47,25 @@ android.libraryVariants.configureEach {
 
     tasks.named("generate${variantName}Resources").configure {
         this.dependsOn(prepareJSTask);
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = "com.breautek.fuse"
+            artifactId = "nativeview"
+            version = file("../VERSION").toString().trim()
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("https://archiva.breautek.com/repository/breautek")
+            credentials {
+                username = findProperty("breautek.repository.user").toString()
+                password = findProperty("breautek.repository.password").toString()
+            }
+        }
     }
 }
