@@ -39,7 +39,7 @@ echo $BUILD_NO > ./ios/BUILD
 ./buildIOS.sh
 ./test.sh
 
-git add ios/VERSION ios/BUILD ios/BTFuseNativeView/VERSION.xcconfig
+git add ios/VERSION ios/BUILD
 git commit -m "iOS Release: $VERSION"
 git push
 git tag -a ios/$VERSION -m "iOS Release: $VERSION"
@@ -55,4 +55,4 @@ gh release create ios/$VERSION \
 pod spec lint BTFuseNativeView.podspec
 assertLastCall
 
-pod repo push breautek BTFuse.podspec
+pod repo push breautek BTFuseNativeView.podspec
