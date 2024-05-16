@@ -1,6 +1,6 @@
 
 Pod::Spec.new do |s|
-    s.name          = 'BTFuseNativeVIew'
+    s.name          = 'BTFuseNativeView'
     s.version       = '$VERSION$'
     s.summary       = 'Fuse Module for incorporating native-views into a Fuse application'
     s.homepage      = 'https://fuse.breautek.com'
