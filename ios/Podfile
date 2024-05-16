@@ -9,12 +9,12 @@ target 'BTFuseNativeView' do
     use_frameworks!
     project 'BTFuseNativeView/BTFuseNativeView.xcodeproj'
     
-    pod 'BTFuse', '0.8.7'
+    pod 'BTFuse', '0.8.8'
 end
 
 target 'TestApp' do
     use_frameworks!
     project 'TestApp/TestApp.xcodeproj'
     
-    pod 'BTFuse', '0.8.7'
+    pod 'BTFuse', '0.8.8'
 end

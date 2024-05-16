@@ -19,6 +19,9 @@
 		941F22752B87DDA4005DCE20 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941F22742B87DDA4005DCE20 /* UIKit.framework */; };
 		941F22772B87DE14005DCE20 /* BTFuseNativeViewRect.h in Headers */ = {isa = PBXBuildFile; fileRef = 941F22762B87DE14005DCE20 /* BTFuseNativeViewRect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		941F22792B87DFB6005DCE20 /* BTFuseNativeViewRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 941F22782B87DFB6005DCE20 /* BTFuseNativeViewRect.m */; };
+		944DAF262BF59CD600FEDAC4 /* VERSION.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 944DAF252BF59CD600FEDAC4 /* VERSION.xcconfig */; };
+		944DAF282BF59D0300FEDAC4 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 944DAF272BF59D0300FEDAC4 /* LICENSE */; };
+		944DAF2B2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 944DAF2A2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig */; };
 		946395572BB89EEF00FCCF77 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946395562BB89EEF00FCCF77 /* CoreGraphics.framework */; };
 		946395592BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 946395582BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m */; };
 		9471FB162BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 9471FB152BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -58,6 +61,10 @@
 		941F22742B87DDA4005DCE20 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		941F22762B87DE14005DCE20 /* BTFuseNativeViewRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTFuseNativeViewRect.h; sourceTree = "<group>"; };
 		941F22782B87DFB6005DCE20 /* BTFuseNativeViewRect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTFuseNativeViewRect.m; sourceTree = "<group>"; };
+		944DAF252BF59CD600FEDAC4 /* VERSION.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = VERSION.xcconfig; sourceTree = "<group>"; };
+		944DAF272BF59D0300FEDAC4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		944DAF292BF59D3E00FEDAC4 /* BTFuseNativeView.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BTFuseNativeView.debug.xcconfig; sourceTree = "<group>"; };
+		944DAF2A2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BTFuseNativeView.release.xcconfig; sourceTree = "<group>"; };
 		946395562BB89EEF00FCCF77 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		946395582BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTFuseNativeViewContainer.m; sourceTree = "<group>"; };
 		9471FB152BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTFuseNativeViewOverlayBuilder.h; sourceTree = "<group>"; };
@@ -110,6 +117,10 @@
 		941F22442B87D2AA005DCE20 = {
 			isa = PBXGroup;
 			children = (
+				944DAF2A2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig */,
+				944DAF292BF59D3E00FEDAC4 /* BTFuseNativeView.debug.xcconfig */,
+				944DAF272BF59D0300FEDAC4 /* LICENSE */,
+				944DAF252BF59CD600FEDAC4 /* VERSION.xcconfig */,
 				9471FB252BDDC15F00E92F50 /* assets */,
 				941F226E2B87D511005DCE20 /* PrivacyInfo.xcprivacy */,
 				941F22502B87D2AA005DCE20 /* BTFuseNativeView */,
@@ -288,6 +299,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				941F226F2B87D511005DCE20 /* PrivacyInfo.xcprivacy in Resources */,
+				944DAF262BF59CD600FEDAC4 /* VERSION.xcconfig in Resources */,
+				944DAF2B2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig in Resources */,
+				944DAF282BF59D0300FEDAC4 /* LICENSE in Resources */,
 				9471FB262BDDC15F00E92F50 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,7 +517,7 @@
 		};
 		941F22612B87D2AA005DCE20 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA97B08B309773B82153526A /* Pods-BTFuseNativeView.debug.xcconfig */;
+			baseConfigurationReference = 944DAF292BF59D3E00FEDAC4 /* BTFuseNativeView.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -541,7 +555,7 @@
 		};
 		941F22622B87D2AA005DCE20 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3373C5502B97A3509D16A25A /* Pods-BTFuseNativeView.release.xcconfig */;
+			baseConfigurationReference = 944DAF2A2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
