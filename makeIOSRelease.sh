@@ -36,12 +36,6 @@ BUILD_NO=$(< "./ios/BUILD")
 BUILD_NO=$((BUILD_NO + 1))
 echo $BUILD_NO > ./ios/BUILD
 
-spushd ios/BTFuseNativeView
-    echo "// This is an auto-generated file, do not edit!" > VERSION.xcconfig
-    echo "CURRENT_PROJECT_VERSION = $BUILD_NO" >> VERSION.xcconfig
-    echo "MARKETING_VERSION = $VERSION" >> VERSION.xcconfig
-spopd
-
 ./buildIOS.sh
 ./test.sh
 

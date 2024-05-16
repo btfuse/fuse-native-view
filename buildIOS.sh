@@ -32,6 +32,12 @@ mkdir -p ./dist/ios
 
 echo "Cleaning the workspace..."
 spushd ios
+    VERSION=$(< VERSION)
+    BUILD_NO=$(< BUILD)
+    echo "// This is an auto-generated file, do not edit!" > BTFuseNativeView/VERSION.xcconfig
+    echo "CURRENT_PROJECT_VERSION = $BUILD_NO" >> BTFuseNativeView/VERSION.xcconfig
+    echo "MARKETING_VERSION = $VERSION" >> BTFuseNativeView/VERSION.xcconfig
+
     xcodebuild -quiet -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Release -destination "generic/platform=iOS" clean
     assertLastCall
     xcodebuild -quiet -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Debug -destination "generic/platform=iOS Simulator" clean
@@ -44,14 +50,16 @@ spushd ios
     xcodebuild -quiet -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Debug -destination "generic/platform=iOS Simulator" build
     assertLastCall
 
-    iosBuild=$(echo "$(xcodebuild -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Release -sdk iphoneos -showBuildSettings | grep "CONFIGURATION_BUILD_DIR")" | cut -d'=' -f2 | xargs)
-    simBuild=$(echo "$(xcodebuild -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Debug -sdk iphonesimulator -showBuildSettings | grep "CONFIGURATION_BUILD_DIR")" | cut -d'=' -f2 | xargs)
+    iosBuild=$(echo "$(xcodebuild -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Release -sdk iphoneos -showBuildSettings | grep -E '^\s*CONFIGURATION_BUILD_DIR =' | awk -F '= ' '{print $2}' | xargs)")
+    simBuild=$(echo "$(xcodebuild -workspace BTFuseNativeView.xcworkspace -scheme BTFuseNativeView -configuration Debug -sdk iphonesimulator -showBuildSettings | grep -E '^\s*CONFIGURATION_BUILD_DIR =' | awk -F '= ' '{print $2}' | xargs)")
+
+    echo "DEBUG: $iosBuild"
 
     echo "Signing iOS build..."
-    codesign -s $BTFUSE_CODESIGN_IDENTITY --deep $iosBuild/BTFuseNativeView.framework
+    codesign -s $BTFUSE_CODESIGN_IDENTITY "$iosBuild/BTFuseNativeView.framework"
 
     echo "Verifying iOS Build"
-    codesign -dvvvv $iosBuild/BTFuseNativeView.framework
+    codesign -dvvvv "$iosBuild/BTFuseNativeView.framework"
     assertLastCall
 
     cp -r $iosBuild/BTFuseNativeView.framework.dSYM ../dist/ios/
@@ -73,7 +81,7 @@ spopd
 
 CHECKSUM=$(cat ./dist/ios/BTFuseNativeView.xcframework.zip.sha1.txt)
 
-podspec=$(<BTFuse.podspec.template)
+podspec=$(<BTFuseNativeView.podspec.template)
 podspec=${podspec//\$VERSION\$/$VERSION}
 podspec=${podspec//\$CHECKSUM\$/$CHECKSUM}
 

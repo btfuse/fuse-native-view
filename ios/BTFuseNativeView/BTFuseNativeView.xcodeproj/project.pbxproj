@@ -19,9 +19,7 @@
 		941F22752B87DDA4005DCE20 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941F22742B87DDA4005DCE20 /* UIKit.framework */; };
 		941F22772B87DE14005DCE20 /* BTFuseNativeViewRect.h in Headers */ = {isa = PBXBuildFile; fileRef = 941F22762B87DE14005DCE20 /* BTFuseNativeViewRect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		941F22792B87DFB6005DCE20 /* BTFuseNativeViewRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 941F22782B87DFB6005DCE20 /* BTFuseNativeViewRect.m */; };
-		944DAF262BF59CD600FEDAC4 /* VERSION.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 944DAF252BF59CD600FEDAC4 /* VERSION.xcconfig */; };
 		944DAF282BF59D0300FEDAC4 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 944DAF272BF59D0300FEDAC4 /* LICENSE */; };
-		944DAF2B2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 944DAF2A2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig */; };
 		946395572BB89EEF00FCCF77 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946395562BB89EEF00FCCF77 /* CoreGraphics.framework */; };
 		946395592BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 946395582BB8A06C00FCCF77 /* BTFuseNativeViewContainer.m */; };
 		9471FB162BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 9471FB152BDB446F00E92F50 /* BTFuseNativeViewOverlayBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -299,8 +297,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				941F226F2B87D511005DCE20 /* PrivacyInfo.xcprivacy in Resources */,
-				944DAF262BF59CD600FEDAC4 /* VERSION.xcconfig in Resources */,
-				944DAF2B2BF59E0C00FEDAC4 /* BTFuseNativeView.release.xcconfig in Resources */,
 				944DAF282BF59D0300FEDAC4 /* LICENSE in Resources */,
 				9471FB262BDDC15F00E92F50 /* assets in Resources */,
 			);
@@ -426,9 +422,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = AF37P8XHYY;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -490,9 +489,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = AF37P8XHYY;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
