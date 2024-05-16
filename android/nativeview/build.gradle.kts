@@ -38,15 +38,15 @@ dependencies {
 }
 
 android.libraryVariants.configureEach {
-    val variantName = this.baseName.replaceFirstChar(Char::titlecase);
+    val variantName = this.baseName.replaceFirstChar(Char::titlecase)
 
     val prepareJSTask = tasks.register<Exec>("prepareJS${variantName}") {
-        this.workingDir("../../");
-        commandLine("npx", "webpack", "--mode", "none", "--config", "webpack.android.js");
+        this.workingDir("../../")
+        commandLine("npx", "webpack", "--mode", "none", "--config", "webpack.android.js")
     }
 
     tasks.named("generate${variantName}Resources").configure {
-        this.dependsOn(prepareJSTask);
+        this.dependsOn(prepareJSTask)
     }
 }
 
@@ -55,7 +55,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.breautek.fuse"
             artifactId = "nativeview"
-            version = file("../VERSION").toString().trim()
+            version = file("../VERSION").readText().trim()
         }
     }
 
