@@ -21,9 +21,16 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
     }
 }
 
@@ -56,6 +63,10 @@ publishing {
             groupId = "com.breautek.fuse"
             artifactId = "nativeview"
             version = file("../VERSION").readText().trim()
+
+            afterEvaluate {
+                from(components["release"])
+            }
         }
     }
 
